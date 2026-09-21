@@ -33,6 +33,10 @@ body{padding:6px 7px 16px}
  <div class="card"><div class="h">IN SIGHTS</div><div id="comb" class="big">$0</div><div class="small l">if all cross</div></div>
 </div>
 
+<div class="card" style="text-align:center"><div class="h">REALISTIC ESTIMATE</div>
+<div style="display:flex;justify-content:space-around"><div><div id="rday" class="big a">-</div><div class="small l">next 24 hours</div></div><div><div id="rmon" class="big a">-</div><div class="small l">per month</div></div></div>
+<div class="small l" style="margin-top:3px">odds of price crossing × <span id="rwin">10</span>% win rate</div></div>
+
 <div class="card"><div class="h">POTENTIAL BY LANE</div><div id="pots"></div></div>
 
 <div class="card"><div class="h">TARGETS</div>
@@ -66,6 +70,7 @@ var last=0;
 function draw(d){last=Date.now();
  $('real').textContent=usd(d.realized.usd);$('fires').textContent=d.realized.fires;
  $('comb').textContent=usd(d.potential.combined);
+ if(d.realistic){$('rday').textContent=usd(d.realistic.day);$('rmon').textContent=usd(d.realistic.month);$('rwin').textContent=Math.round(d.realistic.win_rate*100)}
  $('pots').innerHTML=[['AAVE','Aave'],['MORPHO','Morpho'],['MOONWELL','Moonwell']].map(function(k){return '<div class="row"><span class="l">'+k[1]+'</span><span>'+usd(d.potential[k[0]])+'</span></div>'}).join('');
  var t=d.targets;$('t_armed').textContent=num(t.armed_plans);$('t_near').textContent=num(t.near_line);$('t_wh').textContent=num(t.whales);$('t_cand').textContent=num(t.candidates);$('t_pos').textContent=num(t.positions);
  var names={'MORPHO':'Morpho','AAVE':'Aave','MOONWELL':'Moonwell','RH-MORPHO':'Robinhood'};
