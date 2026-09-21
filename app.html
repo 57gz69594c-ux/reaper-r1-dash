@@ -4,77 +4,84 @@
 <title>REAPER</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{background:#000;color:#f2f2f2;font-family:"Courier New",ui-monospace,monospace;font-size:11px;line-height:1.25;width:100%;overflow-x:hidden;text-transform:uppercase;letter-spacing:.5px}
-body{padding:5px 6px 14px;text-shadow:0 0 3px rgba(255,255,255,.35)}
-body:before{content:"";position:fixed;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0,rgba(0,0,0,0) 2px,rgba(0,0,0,.28) 3px);pointer-events:none;z-index:9}
-.c{color:#35ff6b;text-shadow:0 0 4px rgba(53,255,107,.6)}.r{color:#ff2a2a;text-shadow:0 0 6px rgba(255,42,42,.8)}.g{color:#35ff6b;text-shadow:0 0 4px rgba(53,255,107,.6)}.d{opacity:.55}
-.hd{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid #35ff6b;padding-bottom:2px;margin-bottom:4px}
-.hd b{font-size:15px;letter-spacing:3px}
-#clk{font-size:13px}
-.box{border:1px solid rgba(53,255,107,.55);margin-top:5px;padding:3px 4px 4px;position:relative}
-.box>i{position:absolute;top:-7px;left:6px;background:#000;padding:0 3px;font-style:normal;font-size:9px;letter-spacing:2px}
-.box:before,.box:after{content:"";position:absolute;width:5px;height:5px;border:1px solid #f2f2f2}
-.box:before{top:-2px;right:-2px;border-left:0;border-bottom:0}.box:after{bottom:-2px;left:-2px;border-right:0;border-top:0}
-.row{display:flex;justify-content:space-between;white-space:nowrap}
-.big{font-size:19px;letter-spacing:1px;text-align:center;padding:1px 0}
-.bar{height:6px;border:1px solid currentColor;margin:1px 0 3px;position:relative}.bar b{display:block;height:100%;background:currentColor;box-shadow:0 0 5px currentColor}
-.blink{animation:b 1s steps(2) infinite}@keyframes b{50%{opacity:.15}}
-#stale{display:none;text-align:center;margin-top:4px}
-.ft{text-align:center;margin-top:6px;font-size:9px}
+html,body{background:#000;color:#fff;font-family:Roboto,"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;font-size:13px;line-height:1.3;width:100%;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{padding:6px 7px 16px}
+.l{color:#9aa3ad}.g{color:#3ddc84}.r{color:#ff453a}.a{color:#ffb020}
+.top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.top b{font-size:15px;font-weight:800;letter-spacing:1px}
+#clk{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums}
+.sub{display:flex;justify-content:space-between;font-size:11px;margin-bottom:6px}
+.card{background:#14171b;border-radius:8px;padding:7px 8px;margin-top:6px}
+.h{font-size:10.5px;font-weight:700;letter-spacing:1px;color:#9aa3ad;margin-bottom:3px}
+.hero{display:flex;gap:6px}.hero .card{flex:1;margin-top:0;text-align:center;padding:7px 4px}
+.big{font-size:21px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.15}
+.row{display:flex;justify-content:space-between;align-items:center;padding:2px 0;font-size:13px}
+.row span:last-child{font-weight:700;font-variant-numeric:tabular-nums;text-align:right}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;background:#3ddc84}.dot.r{background:#ff453a}.dot.a{background:#ffb020}.dot.w{background:#9aa3ad}
+.bar{height:5px;border-radius:3px;background:#2a2f36;margin:1px 0 5px;overflow:hidden}.bar b{display:block;height:100%;border-radius:3px;background:#3ddc84}
+.bar.a b{background:#ffb020}.bar.r b{background:#ff453a}
+.small{font-size:11px}
+#stale{display:none;background:#ff453a;color:#000;font-weight:800;text-align:center;border-radius:6px;padding:4px;margin-bottom:6px}
+.blink{animation:b 1s steps(2) infinite}@keyframes b{50%{opacity:.25}}
 </style></head><body>
-<div class="hd"><b>REAPER</b><span id="clk" class="c">--:-- --</span></div>
-<div class="row d"><span id="date">---</span><span>PKT // <span id="link" class="g">LINK</span></span></div>
-<div id="stale" class="r blink">/// SIGNAL LOST ///</div>
+<div class="top"><b>REAPER</b><span id="clk">--:--</span></div>
+<div class="sub l"><span id="date">-</span><span>Pakistan · <span id="link" class="g">live</span></span></div>
+<div id="stale">NO SIGNAL FROM SERVER</div>
 
-<div class="box"><i class="c">PROFIT BANKED</i><div id="real" class="big g">$0.00</div><div class="row d"><span>SHOTS FIRED</span><span id="fires">0</span></div></div>
+<div class="hero">
+ <div class="card"><div class="h">PROFIT MADE</div><div id="real" class="big g">$0</div><div class="small l"><span id="fires">0</span> shots fired</div></div>
+ <div class="card"><div class="h">IN SIGHTS</div><div id="comb" class="big">$0</div><div class="small l">if all cross</div></div>
+</div>
 
-<div class="box"><i class="c">PRIZE IN SIGHTS</i><div id="comb" class="big">$0</div><div id="pots"></div><div class="d" style="font-size:9px;text-align:center">IF EVERY ARMED TARGET CROSSES</div></div>
+<div class="card"><div class="h">POTENTIAL BY LANE</div><div id="pots"></div></div>
 
-<div class="box"><i class="c">TARGETING</i>
-<div class="row"><span>ARMED PLANS</span><span id="t_armed">-</span></div>
-<div class="row"><span>NEAR KILL LINE</span><span id="t_near" class="r">-</span></div>
-<div class="row"><span>WHALES TRACKED</span><span id="t_wh">-</span></div>
-<div class="row"><span>CANDIDATES</span><span id="t_cand">-</span></div>
-<div class="row"><span>POSITIONS</span><span id="t_pos">-</span></div></div>
+<div class="card"><div class="h">TARGETS</div>
+<div class="row"><span class="l">Armed &amp; ready</span><span id="t_armed">-</span></div>
+<div class="row"><span class="l">Close to liquidation</span><span id="t_near" class="a">-</span></div>
+<div class="row"><span class="l">Whales tracked</span><span id="t_wh">-</span></div>
+<div class="row"><span class="l">Candidates</span><span id="t_cand">-</span></div>
+<div class="row"><span class="l">Positions watched</span><span id="t_pos">-</span></div></div>
 
-<div class="box"><i class="c">LANES</i><div id="lanes"></div><div id="sup" class="d" style="font-size:9px;margin-top:2px"></div></div>
+<div class="card"><div class="h">LANES</div><div id="lanes"></div><div id="sup" class="small l" style="margin-top:3px"></div></div>
 
-<div class="box"><i class="c">ASTRA</i><div id="astra" class="big">-</div><div id="aruns" style="font-size:9.5px"></div></div>
+<div class="card"><div class="h">ASTRA</div><div id="astra" class="big" style="font-size:18px">-</div><div id="aruns"></div></div>
 
-<div class="box"><i class="c">SHIP SYSTEMS</i>
-<div class="row"><span>CPU</span><span id="cpu">-</span></div><div class="bar" id="cpub"><b></b></div>
-<div class="row"><span>MEMORY</span><span id="mem">-</span></div><div class="bar" id="memb"><b></b></div>
-<div class="row"><span>DISK</span><span id="dsk">-</span></div><div class="bar" id="dskb"><b></b></div>
-<div class="row"><span>NODE VOLUME</span><span id="vol">-</span></div><div class="bar" id="volb"><b></b></div></div>
-<div class="ft d">SCROLL WHEEL = SCROLL // SIDE = REFRESH</div>
+<div class="card"><div class="h">SERVER</div>
+<div class="row"><span class="l">CPU</span><span id="cpu">-</span></div><div class="bar" id="cpub"><b></b></div>
+<div class="row"><span class="l">Memory</span><span id="mem">-</span></div><div class="bar" id="memb"><b></b></div>
+<div class="row"><span class="l">Disk</span><span id="dsk">-</span></div><div class="bar" id="dskb"><b></b></div>
+<div class="row"><span class="l">Node volume</span><span id="vol">-</span></div><div class="bar" id="volb"><b></b></div></div>
 <script>
 var K=new URLSearchParams(location.search).get('k')||'';
-var URL_='https://167.99.13.69.nip.io/clips/rd-'+K+'/status.json';
+var FEED='https://167.99.13.69.nip.io/clips/rd-'+K+'/status.json';
 function $(i){return document.getElementById(i)}
-function usd(n){if(n==null)return 'CHECK LEDGER';return '$'+Number(n).toLocaleString('en-US',{maximumFractionDigits:n<1000?2:0})}
+function usd(n){if(n==null)return 'see ledger';n=Number(n);if(n>=100000)return '$'+(n/1000).toFixed(0)+'k';if(n>=10000)return '$'+(n/1000).toFixed(1)+'k';return '$'+n.toLocaleString('en-US',{maximumFractionDigits:n<100?2:0})}
 function num(n){return n==null?'-':Number(n).toLocaleString('en-US')}
-function clock(){var o={timeZone:'Asia/Karachi'};var n=new Date();
+function clock(){var o={timeZone:'Asia/Karachi'},n=new Date();
  $('clk').textContent=n.toLocaleTimeString('en-US',Object.assign({hour:'numeric',minute:'2-digit',second:'2-digit',hour12:true},o));
- $('date').textContent=n.toLocaleDateString('en-US',Object.assign({weekday:'short',day:'2-digit',month:'short'},o));}
-function bar(id,p,txt){var e=$(id+'b');var col=p>=90?'r':p>=75?'':'g';e.className='bar '+col;e.firstChild.style.width=Math.min(100,p)+'%';$(id).textContent=txt;$(id).className=col}
-function age(s){if(s==null)return '?';return s<90?s+'S':Math.round(s/60)+'M'}
+ $('date').textContent=n.toLocaleDateString('en-US',Object.assign({weekday:'short',day:'numeric',month:'short'},o));}
+function bar(id,p,txt){var c=p>=90?'r':p>=75?'a':'';$(id+'b').className='bar '+c;$(id+'b').firstChild.style.width=Math.min(100,p)+'%';$(id).textContent=txt;$(id).className=c}
+function age(s){if(s==null)return '?';return s<90?s+'s':Math.round(s/60)+' min'}
 var last=0;
 function draw(d){last=Date.now();
  $('real').textContent=usd(d.realized.usd);$('fires').textContent=d.realized.fires;
  $('comb').textContent=usd(d.potential.combined);
- $('pots').innerHTML=['AAVE','MORPHO','MOONWELL'].map(function(k){return '<div class="row"><span>'+k+'</span><span>'+usd(d.potential[k])+'</span></div>'}).join('');
+ $('pots').innerHTML=[['AAVE','Aave'],['MORPHO','Morpho'],['MOONWELL','Moonwell']].map(function(k){return '<div class="row"><span class="l">'+k[1]+'</span><span>'+usd(d.potential[k[0]])+'</span></div>'}).join('');
  var t=d.targets;$('t_armed').textContent=num(t.armed_plans);$('t_near').textContent=num(t.near_line);$('t_wh').textContent=num(t.whales);$('t_cand').textContent=num(t.candidates);$('t_pos').textContent=num(t.positions);
- $('lanes').innerHTML=d.lanes.map(function(l){var st=!l.up?'<span class="r blink">DOWN</span>':l.armed?'<span class="g">ARMED</span>':'<span class="c">'+l.state+'</span>';
-  return '<div class="row"><span>'+l.name+'</span><span>'+(l.ready!=null?'<span class="d">RDY </span>'+l.ready+' ':'')+st+'</span></div>'}).join('');
+ var names={'MORPHO':'Morpho','AAVE':'Aave','MOONWELL':'Moonwell','RH-MORPHO':'Robinhood'};
+ $('lanes').innerHTML=d.lanes.map(function(l){var dot=!l.up?'r':l.armed?'':'w';var st=!l.up?'<span class="r blink">DOWN</span>':l.armed?'<span class="g">Armed'+(l.ready!=null?' · '+l.ready:'')+'</span>':'<span class="l">'+(l.state=='SHADOW'?'Shadow':'Watching')+'</span>';
+  return '<div class="row"><span><i class="dot '+dot+'"></i>'+(names[l.name]||l.name)+'</span><span>'+st+'</span></div>'}).join('');
  var dn=d.support.filter(function(s){return !s.up});
- $('sup').innerHTML=dn.length?'<span class="r blink">SUPPORT DOWN: '+dn.map(function(s){return s.name}).join(', ')+'</span>':'SUPPORT SYSTEMS '+d.support.length+'/'+d.support.length+' ONLINE';
- var a=d.astra;$('astra').innerHTML=a.state=='THINKING'?'<span class="c blink">THINKING</span>':'<span class="d">IDLE</span>';
- $('aruns').innerHTML=a.runs.map(function(r){return '<div class="row"><span>'+r.run+'</span><span class="d">LAST OUTPUT '+age(r.log_age_s)+' AGO</span></div>'+(r.step?'<div class="d" style="white-space:normal;text-transform:none">'+r.step.replace(/</g,'&lt;')+'</div>':'')}).join('');
- var s=d.sys;bar('cpu',s.cpu,s.cpu.toFixed(0)+'%  LOAD '+s.load.toFixed(1)+'/'+s.cores);bar('mem',s.mem,s.mem.toFixed(0)+'%');bar('dsk',s.disk,s.disk.toFixed(0)+'%  '+s.disk_free_gb+'G FREE');
- if(s.vol!=null)bar('vol',s.vol,s.vol.toFixed(0)+'%');
- var stale=(Date.now()/1000-d.t)>30;$('stale').style.display=stale?'block':'none';$('link').textContent=stale?'STALE':'LINK';$('link').className=stale?'r':'g';}
-function pull(){fetch(URL_+'?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(draw).catch(function(){if(Date.now()-last>20000){$('stale').style.display='block';$('link').textContent='LOST';$('link').className='r'}})}
-window.addEventListener('scrollDown',function(){window.scrollBy(0,60)});window.addEventListener('scrollUp',function(){window.scrollBy(0,-60)});
-window.addEventListener('sideClick',function(){window.scrollTo(0,0);pull()});
-clock();setInterval(clock,1000);pull();setInterval(pull,4000);
+ $('sup').innerHTML=dn.length?'<span class="r blink">DOWN: '+dn.map(function(s){return s.name}).join(', ')+'</span>':'Support services '+d.support.length+'/'+d.support.length+' up';
+ var a=d.astra;$('astra').innerHTML=a.state=='THINKING'?'<span class="g">Thinking</span>':'<span class="l">Idle</span>';
+ $('aruns').innerHTML=a.runs.map(function(r){var slow=r.log_age_s!=null&&r.log_age_s>900;return '<div class="row"><span class="l">'+r.run.replace('RUN','Run ')+'</span><span class="small '+(slow?'a':'')+'">active '+age(r.log_age_s)+' ago</span></div>'+(r.step?'<div class="small l">'+r.step.replace(/</g,'&lt;')+'</div>':'')}).join('');
+ var s=d.sys;bar('cpu',s.cpu,s.cpu.toFixed(0)+'%');bar('mem',s.mem,s.mem.toFixed(0)+'%');bar('dsk',s.disk,s.disk.toFixed(0)+'% · '+s.disk_free_gb+' GB free');if(s.vol!=null)bar('vol',s.vol,s.vol.toFixed(0)+'%');
+ sig((Date.now()/1000-d.t)>30);}
+function sig(bad){$('stale').style.display=bad?'block':'none';$('link').textContent=bad?'stale':'live';$('link').className=bad?'r':'g'}
+function pull(){fetch(FEED+'?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(draw).catch(function(){if(Date.now()-last>20000)sig(true)})}
+/* self-update: if the published page changes, reload automatically */
+var base=null;function ver(){fetch('./app.html?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.text()}).then(function(h){if(base===null)base=h;else if(h!==base)location.replace(location.pathname+location.search.replace(/&r=\d+/,'')+'&r='+Date.now())}).catch(function(){})}
+window.addEventListener('scrollDown',function(){window.scrollBy(0,70)});window.addEventListener('scrollUp',function(){window.scrollBy(0,-70)});
+window.addEventListener('sideClick',function(){window.scrollTo(0,0);pull();ver()});
+clock();setInterval(clock,1000);pull();setInterval(pull,4000);ver();setInterval(ver,60000);
 </script></body></html>
